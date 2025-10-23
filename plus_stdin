@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# SPDX-FileCopyrightText: 2025 Issei Hanashi
 import sys
 
 ans = 0
