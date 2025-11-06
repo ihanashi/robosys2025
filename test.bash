@@ -9,15 +9,15 @@ ng () {
 
 res=0
 
-out=$(seq 5 | ./plus_stdin)
+out=$(seq 5 | ./plus)
 [ "${out}" = 15 ] || ng "$LINENO"
 
 
-out=$(seq あ | ./plus_stdin)
+out=$(seq あ | ./plus)
 [ "$?" = 1 ]         || ng "$LINENO"
 [ "${out}" = "" ]    || ng "$LINENO"
 
-out=$(echo | ./plus_stdin)
+out=$(echo | ./plus)
 [ "$?" = 1 ]         || ng "$LINENO"
 [ "${out}" = "" ]    || ng "$LINENO"
 
