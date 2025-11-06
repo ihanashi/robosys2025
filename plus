@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: 2025 Issei Hanashi
 # SPDX-License-Identifier: GPL-3.0-only
 import sys
+
 def tonum(s):
     try:
         return int(s)
