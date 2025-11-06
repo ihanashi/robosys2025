@@ -13,7 +13,7 @@ out=$(seq 5 | ./plus)
 [ "${out}" = 15 ] || ng "$LINENO"
 
 
-out=$(seq あ | ./plus)
+out=$(echo あ | ./plus)
 [ "$?" = 1 ]         || ng "$LINENO"
 [ "${out}" = "" ]    || ng "$LINENO"
 
