@@ -1,17 +1,27 @@
 #!/usr/bin/python3
 # SPDX-FileCopyrightText: 2025 Issei Hanashi
 # SPDX-License-Identifier: GPL-3.0-only
-import sys
+from datetime import datetime
 
-def tonum(s):
-    try:
-        return int(s)
-    except:
-        return float(s)
+LOGFILE = "log.txt"
 
-ans = 0
-for line in sys.stdin:
-    line = line.rstrip()
-    ans += tonum(line)
+print("ログ開始（終了するには exit ）")
+while True:
+    msg = input("> ").strip()
+    if msg.lower() == "exit":
+        print("終了します。")
+        break
 
-print(ans)
+    # 空のメッセージは無視
+    if not msg:
+        continue
+
+    # 現在時刻
+    timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
+
+    # ファイルに追記
+    with open(LOGFILE, "a", encoding="utf-8") as f:
+        f.write(f"{timestamp} {msg}\n")
+
+    print("✓ 保存しました")
+
