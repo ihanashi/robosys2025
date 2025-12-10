@@ -1,35 +1,30 @@
 #!/usr/bin/python3
 # SPDX-FileCopyrightText: 2025 Issei Hanashi
 # SPDX-License-Identifier: GPL-3.0-only
-import sys
 
 from datetime import datetime
+import sys
 
 LOGFILE = "log.txt"
 
+print("ログ開始（終了するには exit ）")
+
 if not sys.stdin.isatty():
-    # CI（GitHub Actions）では入力できないので即終了
-    print("ログ開始（終了するには exit ）")
+    # CI用に2行目にプロンプトを明示
+    print(">")
     sys.exit(0)
 
-
-print("ログ開始（終了するには exit ）")
+# ローカル実行時のみ対話
 while True:
     msg = input("> ").strip()
     if msg.lower() == "exit":
         print("終了します。")
         break
 
-    # 空のメッセージは無視
     if not msg:
         continue
 
-    # 現在時刻
     timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
-
-    # ファイルに追記
-    with open(LOGFILE, "a", encoding="utf-8") as f:
+    with open(LOGFILE, "a") as f:
         f.write(f"{timestamp} {msg}\n")
-
-    print("✓ 保存しました")
 
