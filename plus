@@ -1,9 +1,17 @@
 #!/usr/bin/python3
 # SPDX-FileCopyrightText: 2025 Issei Hanashi
 # SPDX-License-Identifier: GPL-3.0-only
+import sys
+
 from datetime import datetime
 
 LOGFILE = "log.txt"
+
+if not sys.stdin.isatty():
+    # CI（GitHub Actions）では入力できないので即終了
+    print("ログ開始（終了するには exit ）")
+    sys.exit(0)
+
 
 print("ログ開始（終了するには exit ）")
 while True:
