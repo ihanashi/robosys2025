@@ -1,6 +1,6 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2025 Issei Hanashi
-# SPDX-License-Identifier: GPL-3.0-only
+# SPDX-License-Identifier: BSD-3-Clause
 
 from datetime import datetime
 import sys
@@ -9,14 +9,14 @@ LOGFILE = "log.txt"
 
 print("ログ開始（終了するには exit ）")
 
+# CI やパイプ入力時は即終了（無限待ち防止）
 if not sys.stdin.isatty():
-    # CI用に2行目にプロンプトを明示
     print(">")
     sys.exit(0)
 
-# ローカル実行時のみ対話
 while True:
     msg = input("> ").strip()
+
     if msg.lower() == "exit":
         print("終了します。")
         break
@@ -25,6 +25,12 @@ while True:
         continue
 
     timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
-    with open(LOGFILE, "a") as f:
-        f.write(f"{timestamp} {msg}\n")
+    log_line = f"{timestamp} {msg}"
+
+    # 標準出力に表示（仕様対応）
+    print(log_line)
+
+    # ファイルへ追記保存
+    with open(LOGFILE, "a", encoding="utf-8") as f:
+        f.write(log_line + "\n")
 
